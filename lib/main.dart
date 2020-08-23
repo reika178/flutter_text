@@ -49,6 +49,7 @@ class Pavlova extends StatelessWidget {
       color: Colors.black,
       fontWeight: FontWeight.w800,
       fontFamily: 'Roboto',
+      letterSpacing: 0.5, 
       fontSize: 18,
       height: 2,
     );
@@ -69,14 +70,14 @@ class Pavlova extends StatelessWidget {
             ),
             Column(
               children: [
-                Icon(Icons.kitchen, color: Colors.green[500]),
+                Icon(Icons.timer, color: Colors.green[500]),
                 Text('COOK:'),
                 Text('1 hr'),
               ],
             ),
             Column(
               children: [
-                Icon(Icons.timer, color: Colors.green[500]),
+                Icon(Icons.restaurant, color: Colors.green[500]),
                 Text('FEEDS:'),
                 Text('4-6'),
               ],
