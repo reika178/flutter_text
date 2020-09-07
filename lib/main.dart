@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +14,26 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
          primarySwatch: Colors.blue,
       ),
-      home: MyWidget(title: 'InheritedWidget'),
+      home: Scaffold(
+        appBar: AppBar(title: Text('InheritedWidget')),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Text("MyWidget"),
+              MyWidget(key: myWidgetState),
+              NoRefToImportantDataWidget()
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            myWidgetState.currentState.doImportantThings();
+          },
+          tooltip: 'Increment',
+          child: Icon(Icons.add),
+          ),
+          backgroundColor: Colors.green,
+      )
   );
   }
 }
@@ -24,13 +44,13 @@ class MyWidget extends StatefulWidget {
   MyWidget({Key key, this.title}) : super(key: key);
 
   @override
-  _MyWidgetState createState() => _MyWidgetState();
+  MyWidgetState createState() => MyWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class MyWidgetState extends State<MyWidget> {
   ImportantData importantData = ImportantData();
 
-  _doImportantThings() {
+  doImportantThings() {
     setState(() {
       importantData.increment();
     });
@@ -39,22 +59,20 @@ class _MyWidgetState extends State<MyWidget> {
   @override
   Widget build(BuildContext context) {
     debugPrint("MyWidget is build");
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Text("MyWidget"),
-            AnotherWidget(importantData: importantData)
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _doImportantThings,
-        tooltip: 'Increment',
-        child: Icon(Icons.add), 
-      ),
-      backgroundColor: Colors.green,
+    return AnotherWidget(importantData: importantData);
+  }
+}
+
+class NoRefToImportantDataWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    debugPrint("NoRefToImportantDataWidgetState is Build");
+    return Container(
+      height: 100,
+      decoration: BoxDecoration(color: Colors.red),
+      child: Column(children: <Widget>[
+        Text("NoRefToImportantDataWidget"),
+      ])
     );
   }
 }
