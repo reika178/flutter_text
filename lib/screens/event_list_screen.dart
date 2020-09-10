@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_text/blocs/event_list/event_list_bloc.dart';
+import 'package:flutter_text/blocs/event_list/event_list_event.dart';
+import 'package:flutter_text/blocs/event_list/event_list_state.dart';
+import 'package:flutter_text/models/event.dart';
+import 'package:flutter_text/repositories/firestore_event_list_repository.dart';
 
 class EventListScreen extends StatelessWidget {
   @override
@@ -16,7 +22,7 @@ class EventListScreen extends StatelessWidget {
         bloc: eventListBloc,
         builder: (context, state) {
 
-          if (state is EventListInProgressInProgress) {
+          if (state is EventListInProgress) {
             return Center(
               child: CircularProgressIndicator(),
             );
