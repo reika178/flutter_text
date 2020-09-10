@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_text/blocs/event_list/event_list_repository.dart';
+import 'package:flutter_text/models/event.dart';
+
 class FirestoreEventListRepository extends EventListRepository {
   final Firestore _firestore;
 
-  FirestoreEventListrepository(
+  FirestoreEventListRepository(
     {Firestore firestore})
     : _firestore = firestore ?? Firestore.instance;
 
