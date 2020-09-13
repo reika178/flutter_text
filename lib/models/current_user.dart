@@ -1,19 +1,25 @@
 import 'package:meta/meta.dart';
 
 @immutable
-class User {
+class CurrentUser {
   final String id;
   final String name;
   final String photoUrl;
-  final String createAt;
-  final String updateAt;
+  final bool isAnonymous;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  User(
+  CurrentUser(
     {@required this.id,
     @required this.name,
     @required this.photoUrl,
-    @required this.createAt,
-    @required this.updateAt})
+    @required this.isAnonymous,
+    @required this.createdAt,
+    @required this.updatedAt})
     : assert(id != null),
-      assert(name != null);
+      assert(name != null),
+      assert(photoUrl != null),
+      assert(isAnonymous != null),
+      assert(createdAt != null),
+      assert(updatedAt != null);
 }

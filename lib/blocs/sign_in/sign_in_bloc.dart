@@ -16,29 +16,30 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
-    if (event is SigninWithGoogleOnPressed) {
+    if (event is SignInWithGoogleOnPressed) {
       yield* _mapSignInWithGoogleOnPressed();
     } if (event is SignInAnonymouslyOnPressed) {
       yield* _mapSignInAnonymouslyOnPressed();
     } 
   }
 
-  Stream<SignInState> _mapSignInGoogleOnPressed() async* {
-    if (event is SignInWithGoogleOnPressed) {
-      yield* _mapSignInWithGoogleOnPressed();
-    }
-    if (event is SignInAnonymouslyOnPressed) {
-      yield* _mapSignInAnonymouslyOnPressed();
+  Stream<SignInState> _mapSignInWithGoogleOnPressed() async* {
+    yield SignInLoading();
+    try {
+      await _signInRepository.signInWithGoogle();
+      yield SignInSuccess();
+    } catch (_) {
+      yield SignInFailure();
     }
   }
 
-  Stream<SignInState> _mapSignInAnpnymouslyOnPressed() async* {
+  Stream<SignInState> _mapSignInAnonymouslyOnPressed() async* {
     yield SignInLoading();
     try {
       await _signInRepository.signInAnonymously();
       yield SignInSuccess();
     } catch (_) {
-      yield SignInFailure
+      yield SignInFailure();
     }
   }
 }

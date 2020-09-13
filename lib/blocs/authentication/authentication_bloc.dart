@@ -30,12 +30,12 @@ class AuthenticationBloc
 
   Stream<AuthenticationState> _mapAppStartedToState() async* {
     try {
-      final isSignedIn = await _authRepository.isSugnedIn();
+      final isSignedIn = await _authRepository.isSignedIn();
       if (isSignedIn) {
         final currentUser = await _authRepository.getCurrentUser();
         yield AuthenticationSuccess(currentUser);
       } else {
-        yield AithenticationFailure();
+        yield AuthenticationFailure();
       }
     } catch (_) {
       yield AuthenticationFailure();

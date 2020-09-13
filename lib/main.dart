@@ -13,7 +13,7 @@ void main() {
   runApp(
     BlocProvider<AuthenticationBloc>(
       builder: (context) => 
-        AuthenticalBloc(authrepository: authenticalrepository)
+        AuthenticationBloc(authRepository: authenticationrepository)
           ..dispatch(AppStarted()),
       child: MyApp(),
     ),
@@ -29,15 +29,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
          primaryColor: Colors.indigo[900],
          accentColor: Colors.pink[800],
-         brightness: Blightness.light),
+         brightness: Brightness.light),
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         bloc: authenticationBloc,
         builder: (context, state) {
           if (state is AuthenticationInProgress) {
             return SplashScreen();
           }
-          if (state is Authenticationsuccess) {
-            return EvetnListScreen();
+          if (state is AuthenticationSuccess) {
+            return EventListScreen();
           }
           if (state is AuthenticationFailure) {
             return SignInScreen();

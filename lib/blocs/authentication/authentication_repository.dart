@@ -1,6 +1,6 @@
 import 'package:flutter_text/models/current_user.dart';
 
-abstract class Authenticationrepository {
+abstract class AuthenticationRepository {
   Future<void> signOut();
 
   Future<bool> isSignedIn();

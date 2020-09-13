@@ -1,13 +1,10 @@
-import 'package:flutter/semantics.dart';
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
+import 'package:flutter_text/models/event.dart';
 
+@immutable
 abstract class EventListState extends Equatable {
   EventListState([List props = const []]) : super(props);
-}
-
-class EventListLoad extends EventListEvent {
-
-  @override
-  String toString() => 'EventListLoad';
 }
 
 class EventListEmpty extends EventListState {
@@ -40,34 +37,4 @@ class EventListFailure extends EventListState {
 
   @override
   String toString() => 'EventListFailure';
-}
-
-class EventListBloc extends Bloc<EventListEvent, EventListState> {
-
-  final EventListRepository _eventListRepository;
-
-  EventListBloc({@required EventListRepository eventListRepository})
-    : assert(eventListRepository != null),
-      _eventListRepository = eventListRepository;
-
-  @override
-  EventListState get initialState => EventListEmpty();
-
-  @override
-  Stream<EventListState> mapEventToState(EventListEvent event) async* {
-    if (event is EventListLoad) {
-      yield* _mapEventListLoadToState();
-    }
-  }
-
-  Stream<EventListState> _mapEventListLoadToState() async* {
-    yield EventListInProgress();
-    try {
-      yield EventListSuccess(
-        eventList: _eventListRepository.fetch()
-      );
-    } catch (_) {
-      yield EventListFailure(error: _);
-    }
-  }
 }

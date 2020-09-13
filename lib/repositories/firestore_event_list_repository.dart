@@ -11,7 +11,7 @@ class FirestoreEventListRepository extends EventListRepository {
 
   @override
   Stream<List<Event>> fetch() {
-    return _firestore.collection("events").snapShots().map((snapshot) {
+    return _firestore.collection("events").snapshots().map((snapshot) {
       return snapshot.documents.map((docs) {
 
         return Event(

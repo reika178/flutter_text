@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sample_app/blocs/sign_in/sign_in_repository.dart';
+import 'package:flutter_text/blocs/sign_in/sign_in_repository.dart';
 
 class FirebaseSignInRepository extends SignInRepository {
   final FirebaseAuth _firebaseAuth;
@@ -20,11 +20,11 @@ class FirebaseSignInRepository extends SignInRepository {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    await _firebaseAith.signInWothCredential(credential);
+    await _firebaseAuth.signInWithCredential(credential);
   }
 
   @override
-  Future<void> signinAnonymously() async {
+  Future<void> signInAnonymously() async {
     await _firebaseAuth.signInAnonymously();
   }
 }

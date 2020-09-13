@@ -5,12 +5,12 @@ import 'package:flutter_text/blocs/authentication/authentication_bloc.dart';
 import 'package:flutter_text/blocs/authentication/authentication_event.dart';
 import 'package:flutter_text/blocs/sign_in/sign_in_bloc.dart';
 import 'package:flutter_text/blocs/sign_in/sign_in_event.dart';
-import 'package:flutter_text/blocs/sign_in/sing_in_state.dart';
-import 'package:flutter_text/repositories/firebase_sign_in_repository.dart';
+import 'package:flutter_text/blocs/sign_in/sign_in_state.dart';
+import 'package:flutter_text/repositories/firestore_sign_in_repository.dart';
 
-class SinInScreen extends StatelesWidget {
+class SignInScreen extends StatelessWidget {
   @override
-  Widget build(BuilderContext context) {
+  Widget build(BuildContext context) {
     final signInBloc = SignInBloc(signInRepository: FirebaseSignInRepository());
     final authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
 
@@ -56,9 +56,9 @@ class SinInScreen extends StatelesWidget {
               children: <Widget>[
                 RaisedButton.icon(
                   onPressed: () {
-                    signInBloc.dispatch(SighInAnonymouslyOnPressed());
+                    signInBloc.dispatch(SignInAnonymouslyOnPressed());
                   },
-                  icon: Icon(Icons.account_curcle),
+                  icon: Icon(Icons.account_circle),
                   label: Text("Guest Login")
                 ),
                 RaisedButton.icon(
@@ -70,7 +70,7 @@ class SinInScreen extends StatelesWidget {
                     color: Colors.white,
                   ),
                   label: Text("Login With Google",
-                      style: TextStyle(color: Colors:white))
+                      style: TextStyle(color: Colors.white))
                 )
               ],
             ),

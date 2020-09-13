@@ -1,10 +1,12 @@
+import 'package:meta/meta.dart';
+
+@immutable
 class Event {
   final String id;
   final String title;
   final String description;
-  final Datatime date ;
+  final DateTime date ;
   final String imageUrl;
-  final User owner ;
 
   Event(
     {@required this.id,
@@ -12,11 +14,21 @@ class Event {
     @required this.description,
     @required this.date,
     @required this.imageUrl,
-    @required this.owner})
+    })
     : assert(id != null),
       assert(title != null),
       assert(description != null),
       assert(date != null),
-      assert(imageUrl != null),
-      assert(owner != null)
+      assert(imageUrl != null);
+
+  static Event fromJson(Map<String, dynamic> json) {
+    return Event(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      // いらないかも下の一行
+      date: json['date'],
+      imageUrl: json['image_Url'],
+    );
+  }
 }

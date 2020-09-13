@@ -12,7 +12,7 @@ class AuthenticationInProgress extends AuthenticationState {
   String toString() => 'Uninitialized';
 }
 
-class AithenticationSuccess extends AuthenticationState {
+class AuthenticationSuccess extends AuthenticationState {
   final CurrentUser currentUser;
 
   AuthenticationSuccess(this.currentUser) : super([currentUser]);
